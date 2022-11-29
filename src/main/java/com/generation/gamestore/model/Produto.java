@@ -1,5 +1,6 @@
 package com.generation.gamestore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +26,18 @@ public class Produto {
 
     public LocalDateTime getDataChegada() {
         return dataChegada;
+    }
+
+    @ManyToOne
+    @JsonIgnoreProperties("produto")
+    private Categoria categoria;
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public void setDataChegada(LocalDateTime dataChegada) {
