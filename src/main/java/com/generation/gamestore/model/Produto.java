@@ -1,0 +1,60 @@
+package com.generation.gamestore.model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table (name = "tb_produtos")
+public class Produto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank(message = "O Nome é obrigatório.")
+    @Size(min = 1, max = 100, message ="O Nome deve conter de 1 a 100 caracteres.")
+    private String nome;
+
+    @NotNull(message = "O Preço é obrigatório.")
+    private Float preco;
+
+    public LocalDateTime getDataChegada() {
+        return dataChegada;
+    }
+
+    public void setDataChegada(LocalDateTime dataChegada) {
+        this.dataChegada = dataChegada;
+    }
+
+    @UpdateTimestamp
+    private LocalDateTime dataChegada;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Float getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Float preco) {
+        this.preco = preco;
+    }
+}
