@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categorias")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping ("/categorias")
+@CrossOrigin (origins = "*", allowedHeaders = "*")
 public class CategoriaController {
 
     @Autowired
@@ -22,14 +22,12 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaRepository.findAll());
     }
 
-    @GetMapping("{id}")
+    @GetMapping ("{id}")
     public ResponseEntity<Categoria> getById(@PathVariable Long id) {
-        return categoriaRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        return categoriaRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @GetMapping("/nome/{nome}")
+    @GetMapping ("/nome/{nome}")
     public ResponseEntity<List<Categoria>> getbyNome(@PathVariable String nome) {
         return ResponseEntity.ok(categoriaRepository.findAllByNomeContainingIgnoreCase(nome));
     }
