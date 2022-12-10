@@ -14,23 +14,38 @@ import java.time.LocalDateTime;
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O Nome é obrigatório.")
-    @Size(min = 1, max = 100, message ="O Nome deve conter de 1 a 100 caracteres.")
+    @NotBlank (message = "O Nome é obrigatório.")
+    @Size (min = 1, max = 100, message = "O Nome deve conter de 1 a 100 caracteres.")
     private String nome;
 
-    @NotNull(message = "O Preço é obrigatório.")
+    @NotNull (message = "O Preço é obrigatório.")
     private Float preco;
+
+    @UpdateTimestamp
+    private LocalDateTime dataChegada;
+
+    @ManyToOne
+    @JsonIgnoreProperties ("produto")
+    private Categoria categoria;
+
+    @ManyToOne
+    @JsonIgnoreProperties ("usuario")
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public LocalDateTime getDataChegada() {
         return dataChegada;
     }
-
-    @ManyToOne
-    @JsonIgnoreProperties("produto")
-    private Categoria categoria;
 
     public Categoria getCategoria() {
         return categoria;
@@ -43,9 +58,6 @@ public class Produto {
     public void setDataChegada(LocalDateTime dataChegada) {
         this.dataChegada = dataChegada;
     }
-
-    @UpdateTimestamp
-    private LocalDateTime dataChegada;
 
     public Long getId() {
         return id;
